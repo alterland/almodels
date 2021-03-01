@@ -1,0 +1,5 @@
+{
+  "loader": "forge:obj",
+  "model": "almodels:models/block/double_bed_1.obj",
+  "flip-v": true
+}

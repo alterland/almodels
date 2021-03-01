@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north,part=0": {
+      "model": "almodels:block/double_bed_1"
+    },
+    "facing=east,part=0": {
+      "model": "almodels:block/double_bed_1"
+    },
+    "facing=south,part=0": {
+      "model": "almodels:block/double_bed_1"
+    },
+    "facing=west,part=0": {
+      "model": "almodels:block/double_bed_1"
+    }
+  }
+}
