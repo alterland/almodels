@@ -1,6 +1,5 @@
 package ru.alterland.almodels.block;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.block.AbstractBlock;;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,7 +17,7 @@ import javax.annotation.Nullable;
 
 public class DoubleBedBlock1 extends IBigBlock {
 
-    private static final IntegerProperty PART = IntegerProperty.create("part", 0, 11);
+    public static final IntegerProperty PART = IntegerProperty.create("part", 0, 11);
 
     private static final VoxelShape[][] shape = {
         {

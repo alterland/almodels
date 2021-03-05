@@ -21,7 +21,7 @@ abstract public class IBigBlock extends HorizontalBlock implements ITileEntityPr
     private final int WIDTH;
     private final int HEIGHT;
     private final VoxelShape[][] SHAPE;
-    private final IntegerProperty PART;
+    public static IntegerProperty PART;
 
     public IBigBlock(final Properties properties, int length, int width, int height, IntegerProperty property, VoxelShape[][] shape) {
         super(properties);
@@ -30,6 +30,8 @@ abstract public class IBigBlock extends HorizontalBlock implements ITileEntityPr
         HEIGHT = height;
         PART = property;
         SHAPE = shape;
+        BlockState defaultBlockState = this.stateContainer.getBaseState();
+        this.setDefaultState(defaultBlockState);
     }
 
     private VoxelShape getShape(BlockState state)

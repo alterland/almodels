@@ -4,9 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import ru.alterland.almodels.ALModels;
+import ru.alterland.almodels.renderer.ObjRenderer;
 import ru.alterland.almodels.tileentity.DoubleBedTileEntity1;
 
 import java.util.function.Supplier;
@@ -26,6 +28,8 @@ public class TileEntities {
             final TileEntityType<T> tileEntityType = TileEntityType.Builder
                     .create(tileEntityFactory, validBlock.get())
                     .build(null);
+
+            ClientRegistry.bindTileEntityRenderer(tileEntityType, ObjRenderer::new);
 
             return tileEntityType;
         });
