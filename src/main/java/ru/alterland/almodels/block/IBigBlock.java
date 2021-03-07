@@ -30,7 +30,7 @@ abstract public class IBigBlock extends HorizontalBlock implements ITileEntityPr
         HEIGHT = height;
         PART = property;
         SHAPE = shape;
-        BlockState defaultBlockState = this.stateContainer.getBaseState();
+        BlockState defaultBlockState = this.stateContainer.getBaseState().with(PART, 0);
         this.setDefaultState(defaultBlockState);
     }
 

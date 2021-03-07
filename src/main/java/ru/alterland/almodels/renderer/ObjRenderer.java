@@ -11,12 +11,7 @@ import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.client.model.data.EmptyModelData;
-import ru.alterland.almodels.block.IBigBlock;
-
-import java.util.Random;
 
 public class ObjRenderer extends TileEntityRenderer<TileEntity> {
 
@@ -27,28 +22,22 @@ public class ObjRenderer extends TileEntityRenderer<TileEntity> {
     @Override
     public void render(TileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
-        World world = tileEntityIn.getWorld();
-        if (world == null) return;
-        BlockPos blockPos = tileEntityIn.getPos();
-
         BlockRendererDispatcher dispatcher = Minecraft.getInstance().getBlockRendererDispatcher();
 
-        int part = tileEntityIn.getBlockState().get(IBigBlock.PART);
-        if (part == 0) {
-            BlockState state = tileEntityIn.getBlockState();
-            IBakedModel model = dispatcher.getModelForState(state);
+        BlockState state = tileEntityIn.getBlockState();
+        IBakedModel model = dispatcher.getModelForState(state);
 
-            matrixStackIn.push();
-            matrixStackIn.scale(0.5F, 0.5F, 0.5F);
-            matrixStackIn.translate(20, 0, 0);
+        matrixStackIn.push();
 
-            IVertexBuilder vertexBuffer = bufferIn.getBuffer(RenderType.getSolid());
+        IVertexBuilder vertexBuffer = bufferIn.getBuffer(RenderType.getSolid());
 
-            dispatcher.getBlockModelRenderer().renderModel(
-                    world, model, state, blockPos, matrixStackIn, vertexBuffer, false, new Random(), combinedLightIn, combinedOverlayIn, EmptyModelData.INSTANCE
-            );
+        float brightness = 0.87F;
 
-            matrixStackIn.pop();
-        }
+        dispatcher.getBlockModelRenderer().renderModel(
+                matrixStackIn.getLast(), vertexBuffer, state, model, brightness, brightness, brightness, combinedLightIn, combinedOverlayIn, EmptyModelData.INSTANCE
+        );
+
+        matrixStackIn.pop();
+
     }
 }
