@@ -6,7 +6,9 @@ import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -18,6 +20,7 @@ import ru.alterland.almodels.init.TileEntities;
 public class DoubleBed1Block extends HorizontalBlock {
 
     public static final IntegerProperty PART = IntegerProperty.create("part", 0, 11);
+    public static final Property<Boolean> MODEL = BooleanProperty.create("model");
 
     private static final VoxelShape[][] shape = {
         {
@@ -40,7 +43,7 @@ public class DoubleBed1Block extends HorizontalBlock {
 
     public DoubleBed1Block(final Properties properties) {
         super(properties);
-        this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH));
+        this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(MODEL, false));
         //super(properties, 3, 2, 2, PART, shape);
     }
 
@@ -49,13 +52,14 @@ public class DoubleBed1Block extends HorizontalBlock {
         super.fillStateContainer(builder);
         builder.add(HORIZONTAL_FACING);
         builder.add(PART);
+        builder.add(MODEL);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
-    
+
     @Override
     public boolean hasTileEntity(final BlockState state) {
         return true;
